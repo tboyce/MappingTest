@@ -12,36 +12,54 @@ namespace MappingTest
         {
             var mapper = ConfigureMapping();
 
-            var model1 = new Model1
+            TestModel1(mapper);
+            TestModel2(mapper);
+        }
+
+        private static void TestModel1(IMapper mapper)
+        {
+            var model = new Model1
             {
                 FirstName = "John",
                 LastName = "Smith",
                 SomeValue = "Test"
             };
 
-            var dict1 = model1.ToDictionary();
-            var mapped1 = mapper.Map<PersonName>(dict1);
+            var person = mapper.Map<Person>(model);
 
-            Console.WriteLine($"{mapped1.First} {mapped1.Last}");
+            Console.WriteLine($"{person.Name.First} {person.Name.Last}");
 
-            var model2 = new Model2
+            var model1 = mapper.Map<Model1>(person);
+
+            Console.WriteLine($"{model1.FirstName} {model1.LastName}");
+        }
+
+        private static void TestModel2(IMapper mapper)
+        {
+            var model = new Model2
             {
                 FirstName = "John",
                 LastName = "Smith",
                 SomeOtherValue = "Test"
             };
 
-            var dict2 = model2.ToDictionary();
-            var mapped2 = mapper.Map<PersonName>(dict2);
+            var person = mapper.Map<Person>(model);
 
-            Console.WriteLine($"{mapped2.First} {mapped2.Last}");
+            Console.WriteLine($"{person.Name.First} {person.Name.Last}");
+
+            var model1 = mapper.Map<Model1>(person);
+
+            Console.WriteLine($"{model1.FirstName} {model1.LastName}");
         }
 
         private static IMapper ConfigureMapping()
         {
             var config = new MapperConfiguration(cfg =>
             {
-                cfg.AddProfile<PersonNameMappingProfile>();
+                cfg.AddProfile<PersonMappingProfile<Model1>>();
+                cfg.AddProfile<PersonMappingProfile<Model2>>();
+                cfg.AddProfile<MajescoEntityMappingProfile<Model1>>();
+                cfg.AddProfile<MajescoEntityMappingProfile<Model2>>();
             });
             return config.CreateMapper();
         }

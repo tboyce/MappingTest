@@ -49,9 +49,11 @@
   <ItemGroup>
     <Compile Include="MajescoModels\Model1.cs" />
     <Compile Include="MajescoModels\Model2.cs" />
+    <Compile Include="Mapping\MajescoEntityMappingProfile.cs" />
+    <Compile Include="MmgModels\Party.cs" />
+    <Compile Include="MmgModels\Person.cs" />
     <Compile Include="MmgModels\PersonName.cs" />
-    <Compile Include="Mapping\ObjectToDictionaryHelper.cs" />
-    <Compile Include="Mapping\PersonNameMappingProfile.cs" />
+    <Compile Include="Mapping\PartyMappingProfile.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
