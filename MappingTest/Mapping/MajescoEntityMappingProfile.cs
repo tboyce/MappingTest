@@ -6,12 +6,10 @@ namespace MappingTest.Mapping
     public class MajescoEntityMappingProfile<TDest> : Profile
         where TDest : new()
     {
-        public MajescoEntityMappingProfile()
+        public MajescoEntityMappingProfile() : base("MajescoEntityMappingProfile")
         {
             CreateMap<Person, TDest>().ConvertUsing<TypeConverter>();
         }
-
-        public override string ProfileName => "MajescoEntityMappingProfile";
 
         internal class TypeConverter : ITypeConverter<Person, TDest>
         {

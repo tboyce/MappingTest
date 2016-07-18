@@ -5,12 +5,10 @@ namespace MappingTest.Mapping
 {
     public class PersonMappingProfile<TSource> : Profile
     {
-        public PersonMappingProfile()
+        public PersonMappingProfile() : base("PersonMappingProfile")
         {
             CreateMap<TSource, Person>().ConvertUsing<TypeConverter>();
         }
-
-        public override string ProfileName => "PersonMappingProfile";
 
         internal class TypeConverter : ITypeConverter<TSource, Person>
         {
